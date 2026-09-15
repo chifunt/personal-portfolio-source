@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-09-14T20:34:42.819Z",
+  "images": {
+    "poster": {
+      "src": "/projects/game-animation/game-animation-poster.webp",
+      "width": 1280,
+      "height": 720,
+      "format": "webp"
+    }
+  },
+  "videos": {
+    "render": {
+      "src": "/projects/game-animation/game-animation-render.mp4",
+      "format": "mp4"
+    }
+  },
+  "audio": {},
+  "other": {}
+}

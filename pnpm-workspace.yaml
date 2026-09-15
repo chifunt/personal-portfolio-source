@@ -1,0 +1,19 @@
+packages:
+  - "."
+
+allowBuilds:
+  "@tailwindcss/oxide": true
+  sharp: true
+
+# Chevrotain's older lodash-es range excludes the patched minor release.
+# https://github.com/advisories/GHSA-r5fr-rjxr-66jc
+# https://github.com/advisories/GHSA-f23m-r3pf-42rh
+overrides:
+  lodash-es: 4.18.1
+
+minimumReleaseAgeExclude:
+  - framer-motion@13.3.0
+  - lucide-react@1.46.0
+  - motion-dom@13.3.0
+  - motion-utils@13.3.0
+  - zod@4.6.5

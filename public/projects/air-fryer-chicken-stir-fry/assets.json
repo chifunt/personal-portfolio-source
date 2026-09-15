@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-09-14T21:33:18.663Z",
+  "images": {
+    "basket": {
+      "src": "/projects/air-fryer-chicken-stir-fry/air-fryer-chicken-stir-fry-basket.webp",
+      "width": 819,
+      "height": 782,
+      "format": "webp"
+    },
+    "bowl": {
+      "src": "/projects/air-fryer-chicken-stir-fry/air-fryer-chicken-stir-fry-bowl.webp",
+      "width": 951,
+      "height": 947,
+      "format": "webp"
+    },
+    "edamame": {
+      "src": "/projects/air-fryer-chicken-stir-fry/air-fryer-chicken-stir-fry-edamame.webp",
+      "width": 866,
+      "height": 785,
+      "format": "webp"
+    },
+    "rice-and-chicken": {
+      "src": "/projects/air-fryer-chicken-stir-fry/air-fryer-chicken-stir-fry-rice-and-chicken.webp",
+      "width": 998,
+      "height": 1330,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

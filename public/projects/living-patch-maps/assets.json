@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-09-15T15:21:51.860Z",
+  "images": {
+    "generator-progressions": {
+      "src": "/projects/living-patch-maps/living-patch-maps-generator-progressions.webp",
+      "width": 990,
+      "height": 562,
+      "format": "webp"
+    },
+    "pattern-cover": {
+      "src": "/projects/living-patch-maps/living-patch-maps-pattern-cover.webp",
+      "width": 1200,
+      "height": 1200,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

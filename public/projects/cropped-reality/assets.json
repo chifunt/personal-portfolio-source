@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-09-15T20:35:25.344Z",
+  "images": {
+    "desk-blockout": {
+      "src": "/projects/cropped-reality/cropped-reality-desk-blockout.webp",
+      "width": 895,
+      "height": 503,
+      "format": "webp"
+    },
+    "early-interface": {
+      "src": "/projects/cropped-reality/cropped-reality-early-interface.webp",
+      "width": 1600,
+      "height": 1023,
+      "format": "webp"
+    },
+    "music-arrangement": {
+      "src": "/projects/cropped-reality/cropped-reality-music-arrangement.webp",
+      "width": 1041,
+      "height": 505,
+      "format": "webp"
+    },
+    "title-screen": {
+      "src": "/projects/cropped-reality/cropped-reality-title-screen.webp",
+      "width": 1470,
+      "height": 860,
+      "format": "webp"
+    },
+    "vet-clinic": {
+      "src": "/projects/cropped-reality/cropped-reality-vet-clinic.webp",
+      "width": 1091,
+      "height": 769,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {
+    "soundtrack-excerpt": {
+      "src": "/projects/cropped-reality/cropped-reality-soundtrack-excerpt.mp3",
+      "format": "mp3"
+    }
+  },
+  "other": {}
+}

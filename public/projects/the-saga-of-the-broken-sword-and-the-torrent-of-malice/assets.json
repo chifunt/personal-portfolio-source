@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-09-15T21:55:57.575Z",
+  "images": {
+    "gameplay": {
+      "src": "/projects/the-saga-of-the-broken-sword-and-the-torrent-of-malice/the-saga-of-the-broken-sword-and-the-torrent-of-malice-gameplay.webp",
+      "width": 1280,
+      "height": 719,
+      "format": "webp"
+    },
+    "name-entry": {
+      "src": "/projects/the-saga-of-the-broken-sword-and-the-torrent-of-malice/the-saga-of-the-broken-sword-and-the-torrent-of-malice-name-entry.webp",
+      "width": 1280,
+      "height": 719,
+      "format": "webp"
+    },
+    "title": {
+      "src": "/projects/the-saga-of-the-broken-sword-and-the-torrent-of-malice/the-saga-of-the-broken-sword-and-the-torrent-of-malice-title.webp",
+      "width": 1280,
+      "height": 719,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-09-15T15:21:52.902Z",
+  "images": {
+    "chests": {
+      "src": "/projects/the-circussy-one/the-circussy-one-chests.webp",
+      "width": 1168,
+      "height": 373,
+      "format": "webp"
+    },
+    "combat-poster": {
+      "src": "/projects/the-circussy-one/the-circussy-one-combat-poster.webp",
+      "width": 1280,
+      "height": 720,
+      "format": "webp"
+    },
+    "content-workbench-poster": {
+      "src": "/projects/the-circussy-one/the-circussy-one-content-workbench-poster.webp",
+      "width": 1500,
+      "height": 1056,
+      "format": "webp"
+    },
+    "headliner-fight-poster": {
+      "src": "/projects/the-circussy-one/the-circussy-one-headliner-fight-poster.webp",
+      "width": 1280,
+      "height": 720,
+      "format": "webp"
+    },
+    "performer-hoop-girl": {
+      "src": "/projects/the-circussy-one/the-circussy-one-performer-hoop-girl.webp",
+      "width": 1280,
+      "height": 716,
+      "format": "webp"
+    },
+    "performer-vox": {
+      "src": "/projects/the-circussy-one/the-circussy-one-performer-vox.webp",
+      "width": 1280,
+      "height": 716,
+      "format": "webp"
+    },
+    "ticket-booth": {
+      "src": "/projects/the-circussy-one/the-circussy-one-ticket-booth.webp",
+      "width": 275,
+      "height": 358,
+      "format": "webp"
+    },
+    "world-flythrough-poster": {
+      "src": "/projects/the-circussy-one/the-circussy-one-world-flythrough-poster.webp",
+      "width": 1280,
+      "height": 710,
+      "format": "webp"
+    },
+    "world": {
+      "src": "/projects/the-circussy-one/the-circussy-one-world.webp",
+      "width": 1280,
+      "height": 710,
+      "format": "webp"
+    }
+  },
+  "videos": {
+    "combat": {
+      "src": "/projects/the-circussy-one/the-circussy-one-combat.mp4",
+      "format": "mp4"
+    },
+    "content-workbench": {
+      "src": "/projects/the-circussy-one/the-circussy-one-content-workbench.mp4",
+      "format": "mp4"
+    },
+    "headliner-fight": {
+      "src": "/projects/the-circussy-one/the-circussy-one-headliner-fight.mp4",
+      "format": "mp4"
+    },
+    "world-flythrough": {
+      "src": "/projects/the-circussy-one/the-circussy-one-world-flythrough.mp4",
+      "format": "mp4"
+    }
+  },
+  "audio": {},
+  "other": {}
+}

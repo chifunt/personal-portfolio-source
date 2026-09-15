@@ -1,0 +1,52 @@
+---
+title: Steampunk Study
+subtitle: Rospin Study
+summary: A top-hatted figure waves from a lamplit writing desk. This Blender diorama uses Rose Pine colours, pixel textures, and reusable props to build a small, crowded study.
+slug: steampunk-study
+tags: [3D Art]
+thumbnail: /projects/steampunk-study/steampunk-study-room.webp
+hero: /projects/steampunk-study/steampunk-study-room.webp
+quickStats:
+  tech: [Blender, Geometry Nodes, UV mapping]
+---
+
+The book is still open, the desk lamp is on, and the figure in the chair has turned to wave. Behind the desk, a round window looks out over a dusk skyline. Gears and a wall pipe make the room feel mechanical, while the writing tools give it an occupant.
+
+Steampunk Study, also called Rospin Study, is my Blender modeling project. I used Rose Pine colours throughout the room, with dark wood, muted brass, and grainy pixel textures. The finished render keeps the full corner of the room visible, including the floor and the furniture around the chair.
+
+## Building Props That Stay Editable
+
+The environment has 19 asset collections. Repeated details use Arrays, Mirrors, and Geometry Nodes instances. The five boards across the desktop, for example, come from an Array. Changing their source changes the repeated boards together.
+
+The scene keeps the hidden prototype meshes that those instances need. They are part of the finished construction, even though they do not appear as separate objects in the render. Keeping them avoids storing every repeated book, board, or fitting as unrelated geometry.
+
+Modeling combined manual work with scripted construction and texture baking in Blender. The final scene retains its useful modifiers. The work also included fitting joints, removing overlapping pieces, and checking how the props meet, rather than only judging them from the main camera.
+
+## Keeping the Pixel Texture
+
+The surfaces use explicit seams and unwrapped UVs. The colour images are packed into the Blender file, so the scene does not depend on a folder of missing texture paths when reopened elsewhere.
+
+The texture cleanup moved image regions together with their UV islands. That preserved the grain on the model while reducing unused image space. Repeated parts share their source's texture region. Printed artwork, such as the wall poster, keeps its own mapping.
+
+The small character uses one 512 by 512 colour image. The baked image carries its face and clothing details, while the mesh supplies the hat brim, coat shape, and limbs.
+
+## The Figure in the Chair
+
+<Gallery items={[
+  {
+    src: "/projects/steampunk-study/steampunk-study-character.webp",
+    alt: "The seated character in a dark coat and top hat, with a skull-like face and one hand raised in a wave.",
+    caption: "The character isolated for inspection, in the seated wave I chose for the room."
+  },
+  {
+    src: "/projects/steampunk-study/steampunk-study-topology.webp",
+    alt: "The same seated character shown as a plain shaded mesh with its polygon edges visible.",
+    caption: "The mesh beneath the texture. The character is one connected surface, including the coat and hat."
+  }
+]} />
+
+The rig began with a Mixamo export and was adapted to a smaller set of named controls. It remains an editable rig with 26 bones. I adjusted the final seated wave myself, keeping the book and quill visible in the camera.
+
+The character's pose and the room's lighting needed to work together. The face and raised glove have to read against the darker furniture, while the desk lamp still needs to draw attention to the open book. The final pass uses seven lights and a restrained compositor glow around the bright lamps.
+
+This is a posed diorama. The Blender file retains the rig and reusable environment parts for further work, but the render shown here is the finished scene composition.

@@ -1,0 +1,73 @@
+---
+title: Living Patch Maps
+summary: This thesis concept proposes a way to trace splits and merges in generated patterns and replay the evidence behind each event.
+slug: living-patch-maps
+status: Concept
+featured: true
+thumbnail: /projects/living-patch-maps/living-patch-maps-pattern-cover.webp
+tags: [Research]
+---
+
+If a pattern's region count stays at ten, the pattern may still have changed. One region could split while two others merge. A chart of the total would hide both events.
+
+Living Patch Maps is my bachelor thesis concept for inspecting those transitions. I want to record a generator's states and parameter history, identify candidate structural events, and let the user open the evidence behind each annotation.
+
+<Callout>
+  This is a research concept. The workbench and evaluation are planned; there are no evaluation results yet.
+</Callout>
+
+## Two Kinds of Generator
+
+The main case is Gray-Scott reaction-diffusion, a continuous field whose values form spots and winding structures. The second is a binary cellular automaton that forms cave-like regions. One stores concentrations; the other already has two cell states.
+
+To compare their structure, the workbench would turn each state into a patch map of connected foreground regions. For reaction-diffusion, that first requires a threshold to decide which values count as foreground. That decision becomes part of the evidence.
+
+<Image
+  src="/projects/living-patch-maps/living-patch-maps-generator-progressions.webp"
+  alt="Two example progressions from the concept document. Gray-Scott spots grow into a dense maze, while a binary cellular automaton forms larger connected regions."
+  caption="Example progressions from the concept document. The planned workbench would inspect changes between states like these."
+  width={990}
+  height={562}
+/>
+
+## Opening an Event to See What Changed
+
+<Mermaid
+  title="From a Generator Run to an Inspectable Event"
+  caption="The planned workflow links each annotation to the states and settings that produced it."
+  chart={`flowchart TD
+    accTitle: From a Generator Run to an Inspectable Event
+    accDescr: Gray-Scott and a binary cellular automaton feed a recorded run. Patch analysis compares neighboring states and produces candidate annotations. The user can open an annotation to inspect its evidence and replay the transition.
+    rd[Gray-Scott field] --> run[States and parameter history]
+    ca[Binary cellular automaton] --> run
+    run --> patches[Patch maps and connected regions]
+    patches --> compare[Compare adjacent states]
+    compare --> events[Candidate event timeline]
+    events --> inspect[Open evidence and replay]
+    classDef generator fill:#21313d,stroke:#9ccfd8,color:#e0def4
+    classDef evidence fill:#352935,stroke:#ebbcba,color:#e0def4
+    class rd,ca generator
+    class events,inspect evidence`}
+/>
+
+The proposed analysis compares the overlap of regions in neighbouring states. One predecessor connected to two successors is a candidate split. Two predecessors connected to one successor are a candidate merge. More tangled relationships can remain compound or ambiguous.
+
+Selecting an annotation would show the before and after states, the matched regions, and the analysis settings. Patch count and foreground coverage would supply context, while replay would let the user inspect the transition itself.
+
+## When an Event Label Can Mislead
+
+A region can seem to appear because it grew large enough to pass a minimum-size filter. The planned method would keep the smaller, filtered-out regions as diagnostic evidence, so crossing that filter does not become a false birth or death.
+
+Other limits remain. A patch that moves too far between samples may stop overlapping its predecessor. The method has no motion compensation, so it can lose that correspondence. Changing the foreground threshold can also join regions, while saving fewer states can combine or miss events.
+
+The parameter history would show when an intervention happened. An event nearby on the timeline would still need interpretation; timing alone cannot establish that the intervention caused it.
+
+## What the Study Would Check
+
+The evaluation plan starts with small reference sequences whose region relationships are known. It then examines four generator runs, one autonomous run and one scripted intervention for each generator. Threshold and sampling checks would test which annotations change when the analysis settings change.
+
+A structured expert review would examine whether people can trace an annotation back to its evidence. The proposed browser prototype uses Svelte and TypeScript, with Canvas 2D for dense fields and D3 for timelines. The study concerns structural interpretation, so it would not score a pattern's beauty or a cave's playability.
+
+The moving background on this portfolio is a related reaction-diffusion experiment. The cover image is a static frame from that simulation after 3,600 steps with seed 7. It illustrates the kind of pattern I want to inspect; it does not show the planned workbench or a result from the proposed study.
+
+<RelatedContent slug="personal-portfolio" title="The Live Pattern Behind This Site" />

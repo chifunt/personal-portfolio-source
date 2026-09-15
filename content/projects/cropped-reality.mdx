@@ -1,0 +1,108 @@
+---
+title: Cropped Reality
+summary: A vet-clinic sign can change the meaning of a photograph. Crop it out, add a headline, and satisfy a client who already knows which story they want told.
+slug: cropped-reality
+date: "2025-09-28"
+status: Prototype
+tags: [Games]
+thumbnail: /projects/cropped-reality/cropped-reality-title-screen.webp
+hero: /projects/cropped-reality/cropped-reality-title-screen.webp
+quickStats:
+  tech: [Unity, C#, LLMUnity]
+  role: Audio, design, and game polish
+  duration: 48-hour game jam
+links:
+  - label: Download on itch.io
+    href: https://aruaci.itch.io/cropped-reality
+---
+
+A man holds a struggling cat. A sign behind him says "Vet Clinic." Cut away the sign and the same scene starts to look like evidence of cruelty. Nothing inside the crop has changed. The explanation has disappeared.
+
+Cropped Reality puts you at a magazine editor's desk, taking calls from clients who want a particular version of events published. You crop their pictures and supply a headline. An article generator fills out the story, and messages on your phone show the response to your submission.
+
+We made the Unity prototype for Truth, Lies & Democracy in Vienna, a 48-hour game jam held from 26 to 28 September 2025. Our team, BCC++, won the **Reality Deconstructed** challenge, featured by Belvedere 21. The [organiser's results](https://capitalofdemocracy.eu/we-proudly-present-the-winners-of-truth-lies-democracy-2025-game-jam/) list the game and award.
+
+## The Story Outside the Frame
+
+The vet-clinic picture is one of the game's fictional assignments. The client wants the man portrayed as an animal abuser and asks you to downplay where the photograph was taken. Keeping the man and cat while excluding the clinic sign fulfils that request.
+
+That gives the cropping tool a specific purpose. You have seen the larger picture, so you know what your eventual reader will be missing. The client's preferred framing becomes a task you can complete with a drag of the mouse.
+
+<Image
+  src="/projects/cropped-reality/cropped-reality-vet-clinic.webp"
+  alt="A black-and-white game illustration of a man holding a struggling cat, with a pet carrier below and a Vet Clinic sign behind him."
+  caption="The source illustration used in the assignment. The sign supplies context that the fictional client wants left out."
+  width={1091}
+  height={769}
+/>
+
+The desk gives each step a place. A call brings in the brief and its transcript. The printer produces the picture. You pick up the paper, crop it, and place it on the layout board. Submitting requires a picture, a headline, and an article before the assignment can advance.
+
+## How the Game Reads a Crop
+
+Each source picture carries rectangular labels around meaningful details. A label records whether that detail belongs in the client's requested crop. The selection tool sends the same rectangle to two parts of the game: one creates the cropped picture, and the other checks which labels it contains.
+
+The image path converts the selection into texture coordinates and copies those pixels into a new sprite. The label path checks whether both corners of each label's rectangle sit inside the selection. Partial overlap does not count.
+
+<Mermaid
+  title="One Crop, Two Results"
+  caption="The visible crop and the assignment result come from the same selection. The game checks authored regions of the picture."
+  chart={`flowchart TD
+    accTitle: One Crop, Two Results
+    accDescr: A selected rectangle creates a cropped sprite and identifies fully enclosed image labels. The assignment checks those labels and chooses an authored response.
+    A[Selected Rectangle] --> B[Copy Selected Pixels]
+    B --> C[Cropped Picture]
+    A --> D[Find Fully Enclosed Labels]
+    D --> E[Check Against Client Request]
+    E --> F[Choose Authored Response]`}
+/>
+
+The assignment passes only when every requested label is included and every unwanted label is excluded. For the vet-clinic scene, that means retaining the man and cat while leaving out the sign. Success measures obedience to the brief, even when that brief asks for a misleading result.
+
+This is also a limit of the prototype. A person might recognise a detail from half its shape, while the rectangle test counts it as absent. The rule makes the small set of authored puzzles straightforward to evaluate, but it cannot judge how an arbitrary photograph will be understood.
+
+## A Headline Becomes an Article
+
+The newspaper component sends the player's headline to a text model through LLMUnity. As text arrives, it appears in the article field. The headline is locked during generation and becomes editable again when the response finishes.
+
+Only the headline goes into that request. The model does not receive the crop or its labels. The client's reaction is chosen separately, from the crop check and the assignment's written responses.
+
+That separation matters to the idea behind the game. Text can sound like a complete account even when it has never been checked against the picture beside it. The prototype lets a headline grow into an article without making the generator a judge of the evidence.
+
+## Giving the Desk Feedback
+
+I worked on audio, contributed to the design, and spent much of the jam on game polish. That included the shared sound system, screen prompts, main menu, and feedback when handling the desk objects. I worked with Georg Becker, Christof Kuba, and Laura Cesar.
+
+My `AudioHub` maps named actions to clips, with volume, pitch, looping, and optional pitch variation configured per sound. The printer plays when a picture arrives; picking up the paper and clipping it onto the board have their own cues. Finishing a crop triggers a snip. These sounds mark changes that can otherwise be easy to miss while looking elsewhere on the desk.
+
+The screen-message system handles short prompts such as answering the phone or collecting a printout. It tracks which messages have already appeared, so a one-time instruction can explain an interaction without returning on every assignment. Object hover and pickup behaviour provides another cue about what can be handled.
+
+<Image
+  src="/projects/cropped-reality/cropped-reality-music-arrangement.webp"
+  alt="The soundtrack arrangement with bass, drum, electric piano, grand piano, and rain tracks beneath an 80 BPM tempo lane."
+  caption="The music arrangement during the jam. The excerpt below comes from the track included in the Unity project."
+  width={1041}
+  height={505}
+/>
+
+<AudioPlayer
+  src="/projects/cropped-reality/cropped-reality-soundtrack-excerpt.mp3"
+  title="Jam Soundtrack · 30-Second Excerpt"
+/>
+
+## From Interface Sketch to Desk
+
+<Gallery items={[
+  {
+    src: "/projects/cropped-reality/cropped-reality-early-interface.webp",
+    alt: "An early interface sketch placing a phone and transcript beside an image area, headline field, and client brief.",
+    caption: "The early interface sketch groups the brief, picture, and writing fields on one screen."
+  },
+  {
+    src: "/projects/cropped-reality/cropped-reality-desk-blockout.webp",
+    alt: "An early Unity desk scene with a rough phone shape, transcript clipboard, central article layout, and picture board.",
+    caption: "The 3D blockout gives those jobs physical objects. This is a development image, before the title screen's finished materials."
+  }
+]} />
+
+The [jam build is available for macOS on itch.io](https://aruaci.itch.io/cropped-reality). It remains a short prototype built around authored assignments.

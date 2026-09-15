@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-09-15T20:08:05.670Z",
+  "images": {
+    "breadboard": {
+      "src": "/projects/brickphone/brickphone-breadboard.webp",
+      "width": 1125,
+      "height": 1500,
+      "format": "webp"
+    },
+    "cover": {
+      "src": "/projects/brickphone/brickphone-cover.webp",
+      "width": 1200,
+      "height": 1200,
+      "format": "webp"
+    },
+    "enclosures": {
+      "src": "/projects/brickphone/brickphone-enclosures.webp",
+      "width": 1500,
+      "height": 1125,
+      "format": "webp"
+    },
+    "menu": {
+      "src": "/projects/brickphone/brickphone-menu.webp",
+      "width": 1125,
+      "height": 1500,
+      "format": "webp"
+    },
+    "wiring": {
+      "src": "/projects/brickphone/brickphone-wiring.webp",
+      "width": 1125,
+      "height": 1500,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

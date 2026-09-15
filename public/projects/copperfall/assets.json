@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-09-15T15:21:52.139Z",
+  "images": {
+    "debug": {
+      "src": "/projects/copperfall/copperfall-debug.webp",
+      "width": 1280,
+      "height": 720,
+      "format": "webp"
+    },
+    "gameplay": {
+      "src": "/projects/copperfall/copperfall-gameplay.webp",
+      "width": 1852,
+      "height": 1102,
+      "format": "webp"
+    },
+    "title": {
+      "src": "/projects/copperfall/copperfall-title.webp",
+      "width": 1852,
+      "height": 1102,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

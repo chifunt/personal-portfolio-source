@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-09-14T20:34:38.553Z",
+  "images": {
+    "decision": {
+      "src": "/projects/bursting-panopticon/bursting-panopticon-decision.webp",
+      "width": 3704,
+      "height": 2366,
+      "format": "webp"
+    },
+    "opening": {
+      "src": "/projects/bursting-panopticon/bursting-panopticon-opening.webp",
+      "width": 3704,
+      "height": 2366,
+      "format": "webp"
+    },
+    "title": {
+      "src": "/projects/bursting-panopticon/bursting-panopticon-title.webp",
+      "width": 3704,
+      "height": 2366,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

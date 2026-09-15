@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-09-15T21:55:56.716Z",
+  "images": {
+    "browse": {
+      "src": "/projects/dotdeck/dotdeck-browse.webp",
+      "width": 1477,
+      "height": 736,
+      "format": "webp"
+    },
+    "wireframe": {
+      "src": "/projects/dotdeck/dotdeck-wireframe.webp",
+      "width": 1440,
+      "height": 1024,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

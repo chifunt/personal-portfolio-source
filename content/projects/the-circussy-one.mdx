@@ -1,0 +1,216 @@
+---
+title: The Circussy One
+summary: A Unity roguelite with generated arenas and custom content tools. Its development meant tracking down impossible climbs and a loading screen that refused to animate.
+slug: the-circussy-one
+status: Prototype
+featured: true
+tags: [Games, Tools]
+thumbnail: /projects/the-circussy-one/the-circussy-one-combat-poster.webp
+quickStats:
+  tech: [Unity, C#, UI Toolkit, Wwise]
+links:
+  - label: Read the Source Archive
+    href: https://github.com/chifunt/the-circussy-one-source
+---
+
+A chest sits beyond the crowd, experience gems are scattered behind you, and the next wave is closing in. Your weapons keep attacking while you decide where to move.
+
+The Circussy One is a third-person auto-combat roguelite prototype in Unity. You choose a Performer and build up weapons and Talents across three circus Acts. Automatic attacks put much of the moment-to-moment decision-making into movement, collecting rewards, and choosing upgrades.
+
+The project also became an exercise in making a generated world playable and editable. Its terrain needs usable routes, its enemies need to climb those routes, and its tools need to let me change content without rebuilding a scene.
+
+<Video
+  src="/projects/the-circussy-one/the-circussy-one-combat.mp4"
+  poster="/projects/the-circussy-one/the-circussy-one-combat-poster.webp"
+  preload="none"
+  playsInline
+  aria-label="The Circussy One gameplay clip"
+  caption="The weapons keep firing while the player moves through enemies and collects experience."
+/>
+
+The source archive contains the gameplay systems, editor tools, and tests. It is a reading archive, with the full project's licensed packages and source media omitted.
+
+Read about [the loading freeze](#why-the-loading-screen-still-froze), [the incorrect climb](#the-climb-that-sampled-the-wrong-place), or [the Content Workbench](#authoring-content-without-rebuilding-a-scene).
+
+## Why the Loading Screen Still Froze
+
+The first loading overlay had a working fade and throbber, but selecting a Performer could still freeze both the game and the overlay. Making the transition method asynchronous had not removed the long synchronous work inside it.
+
+Timing the individual stages pointed to Big Top texture generation. The cloth and dressing generators calculated their pixels and uploaded their textures in one main-thread block. Terrain generation was not the main cause of that hitch.
+
+<Mermaid
+  title="Keeping the Loading Overlay Responsive"
+  caption="Pixel calculation can run off-thread after copying its settings. Creating and uploading Unity textures still happens on the main thread."
+  chart={`sequenceDiagram
+    accTitle: Keeping the Loading Overlay Responsive
+    accDescr: The loading system snapshots texture settings, sends pixel generation to a worker, then uploads the completed data and prewarms pooled objects in batches before revealing gameplay.
+    participant M as Unity Main Thread
+    participant W as Worker Thread
+    M->>M: Copy texture settings
+    M->>W: Generate Color32 pixel data
+    Note over M: Loading overlay can keep updating
+    W-->>M: Return generated pixels
+    M->>M: Create Texture2D and upload pixels
+    loop Small prewarm batches
+      M->>M: Prepare pooled views and yield
+    end
+    M->>M: Reveal the next Act`}
+/>
+
+The revised path calculates pixel arrays on a worker, then switches back to Unity for texture creation and upload. Startup prewarm prepares pooled enemies, projectiles, pickups, and feedback effects during loading. It yields between batches so the first combat events do not have to create all those views at once.
+
+This does not make every loading operation parallel. It gives the expensive data calculation and the required Unity object work separate stages that can be timed and inspected.
+
+## The Climb That Sampled the Wrong Place
+
+One traversal bug made enemies choose a surface far above them. Broad changes to climbing produced other failures, including enemies entering walls or climbing the arena barrier. The useful evidence came from logging the contact point, sampled height, and resulting movement decision together.
+
+In one recorded failure, an enemy near `(-53.87, 9.47, -31.26)` received a cast hit point of `(0, 0, 0)`. The subsequent height probe sampled near the world origin and found a surface at height `27.465`. That produced a supposed climb of almost 18 units from an unrelated part of the map.
+
+The fix checks whether the contact point is plausible for the local cast. If it is too far away, sampling starts just ahead of the enemy instead. Constructed ramps provide their own local height through a ramp marker. Terrain still blocks movement, and enemy-on-enemy climbing keeps its separate rules.
+
+That case changed what I needed from a debug tool. A collider outline alone would not explain the climb. I needed to see which position the next query used and why the movement system accepted its answer. Fixed seeds kept the surrounding map repeatable while the logged case became a regression test.
+
+## Authoring Content Without Rebuilding a Scene
+
+The Content Workbench groups Performers, weapons, upgrades, Talents, items, and rewards around their definitions and catalogs. I can select a related definition instead of typing its runtime identifier, inspect where content is used, and create or duplicate entries through the same window.
+
+<Video
+  src="/projects/the-circussy-one/the-circussy-one-content-workbench.mp4"
+  poster="/projects/the-circussy-one/the-circussy-one-content-workbench-poster.webp"
+  preload="none"
+  playsInline
+  aria-label="The Circussy One Content Workbench recording"
+  caption="The original editor recording moves through Performer settings, weapon tuning, Talents, chests, and item creation. Available, disabled, and draft content remain visible to the author."
+/>
+
+Those assets supply values to runtime systems. Plain C# rules calculate damage, cooldowns, and reward choices; Unity views own transforms, renderers, and the visible response. Factories manage pooled objects, while VContainer wires the dependencies at startup.
+
+<Mermaid
+  title="From an Authored Weapon to a Hit"
+  caption="The diagram groups the runtime responsibilities. Weapon-local upgrades and player-global bonuses remain distinct inputs."
+  chart={`flowchart TD
+    accTitle: From an Authored Weapon to a Hit
+    accDescr: Content definitions, local weapon upgrades, and player stats feed combat rules. Runtime systems apply those decisions through pooled Unity views and shared feedback services.
+    authored[Weapon definition] --> rules[Combat rules]
+    local[Weapon-local upgrades] --> rules
+    global[Player stats and Talents] --> rules
+    rules --> systems[Weapon and projectile systems]
+    systems --> pool[Factories and active registries]
+    pool --> views[Unity views and collision queries]
+    systems --> feedback[Damage feedback, audio, and haptics]
+    classDef authoredData fill:#352935,stroke:#ebbcba,color:#e0def4
+    class authored,local,global authoredData`}
+/>
+
+The Config Hub, validation tools, and Visual Test Lab support different parts of that workflow. Config changes tune the game, relationship checks catch broken content references, and repeatable visual scenarios expose presentation problems that a rules test cannot see. Rebuilding generated scenes is a recovery operation, not the normal way to tune a weapon.
+
+## Building a Walkable Circus
+
+The terrain direction is a set of staged platforms and broad, straight ramps inside a Big Top. Early experiments with smooth terrain and crowded ramp layouts made routes difficult to read. The blocky version gives a ledge and a walkable incline different silhouettes.
+
+<Video
+  src="/projects/the-circussy-one/the-circussy-one-world-flythrough.mp4"
+  poster="/projects/the-circussy-one/the-circussy-one-world-flythrough-poster.webp"
+  preload="none"
+  playsInline
+  aria-label="Flythrough of a generated circus Act"
+  caption="A recorded flythrough of the generated grounds, including platforms, ramps, perimeter dressing, and the Big Top."
+/>
+
+The generator has to respect the actual controller's slope limit. Reachability checks and fixed review seeds help inspect the result, but a structurally valid map can still be awkward to cross. I used full maps for traversal review because isolated test ramps did not reproduce the combinations that caused trouble.
+
+Reward placement checks more than a height at one point. It samples a surface, rejects excessive slopes, checks overlap against reserved footprints, and tests the prop's body against the environment. Nearby candidate offsets give it another placement to try before returning a fallback result.
+
+The tent and its dressing also use procedural meshes and textures. Cloth, banners, bulbs, ground materials, and decorative props give the generated geometry a circus setting. These visual systems follow the world's lifetime, so changing Act also removes the old dressing.
+
+## Choosing How to Fight the Crowd
+
+Weapons change which space around the player is dangerous. Juggling Ball ricochets, Cannon creates splash explosions, Knife Fan covers a spread, Fire Hoop attacks around the player, and Spotlight Bolt chains between targets. Their upgrades need to preserve those differences.
+
+| Weapon | Attack Pattern |
+| --- | --- |
+| Juggling Ball | Extra bounces let a shot reach another enemy. |
+| Cannon | Splash radius changes how much space an explosion covers. |
+| Knife Fan | Projectile count changes the fan; accuracy controls aim error separately from the intended spread. |
+| Fire Hoop | An orbiting attack puts damage around the player instead of along a firing line. |
+| Spotlight Bolt | Chaining connects hits across nearby targets. |
+
+<Gallery items={[
+  {
+    src: "/projects/the-circussy-one/the-circussy-one-performer-vox.webp",
+    alt: "Vox, a top-hatted ringmaster, on the Performer selection screen beside the Spotlight Bolt description.",
+    caption: "Vox starts with Spotlight Bolt. The selection screen pairs the character with a weapon and starting bonuses."
+  },
+  {
+    src: "/projects/the-circussy-one/the-circussy-one-performer-hoop-girl.webp",
+    alt: "Hoop Girl on the Performer selection screen beside the Fire Hoop description.",
+    caption: "Hoop Girl starts with Fire Hoop. Both images come from the prototype's recorded selection screen."
+  }
+]} />
+
+Player stats and weapon stats have separate scopes. A weapon upgrade can add damage to one weapon, while a Talent or Performer bonus can affect outgoing damage across the build. The damage calculation adds the local flat bonus to the weapon's base, then applies the global multiplier.
+
+Rounding also matters in small rewards. XP bonuses keep their fractional remainder between pickups. Without that carry, repeatedly rounding a small gem's bonus down could make a chosen XP bonus do nothing. As a simple example, four one-point pickups with a 25% bonus should eventually award five XP.
+
+## The Act Ends at the Door
+
+Opening Act, Center Ring, and Grand Finale have authored schedules of seven, nine, and eleven minutes before their Headliner arrivals. Short Showtime events increase the spawn pressure along the way. The Headliner starts an Encore deadline, and enemies keep spawning after the boss falls.
+
+<Video
+  src="/projects/the-circussy-one/the-circussy-one-headliner-fight.mp4"
+  poster="/projects/the-circussy-one/the-circussy-one-headliner-fight-poster.webp"
+  preload="none"
+  playsInline
+  aria-label="The Circussy One Headliner fight"
+  caption="The Headliner enters while the existing crowd and the player's weapons remain active. This is footage from the presentation prototype."
+/>
+
+The Stage Door becomes available only once Encore has begun and the Headliner is defeated. Defeating the boss early does not instantly end the Act. Reaching the deadline with the boss alive does not skip the fight. Encore increases the enemy pressure, and the player still has to reach the door and interact.
+
+<Mermaid
+  title="Finishing an Act"
+  caption="Boss defeat and the Encore deadline are separate conditions. The exit waits for both."
+  chart={`flowchart TD
+    accTitle: Finishing an Act
+    accDescr: Headliner arrival starts the deadline. Boss defeat and Encore both have to occur before the Stage Door can appear. Using it loads the next Act or ends the run.
+    arrival[Headliner arrives] --> boss[Headliner defeated]
+    arrival --> deadline[Deadline expires and Encore begins]
+    boss --> gate{Both conditions met}
+    deadline --> gate
+    gate --> door[Stage Door appears]
+    door --> use[Reach the door and interact]
+    use -->|Another Act| load[Intermission loads the next world]
+    use -->|Final Act| finish[Curtain Call]
+    classDef exit fill:#21313d,stroke:#9ccfd8,color:#e0def4
+    class door,load,finish exit`}
+/>
+
+The world changes during Intermission, but the build persists. A lifecycle system clears enemies, projectiles, pickups, prompts, and the old environment before creating the next Act. The door also has a placement fallback, so a missing boss-death position cannot leave an otherwise completed Act without an exit.
+
+## Rewards That Make You Stop Moving
+
+XP pulls the player towards defeated enemies. Prize Tickets pull them towards deliberate interactions around the map. Some deposits pay out during a hold, which means deciding how long to stay while enemies approach. Tickets can then pay for locked chests; they belong to the current run.
+
+Chests, Ticket deposits, snacks, and the Stage Door share targeting, prompts, and hold progress. The system selects a nearby candidate by priority and distance, then locks the target during the hold. Passing closer to another object should not redirect an interaction already in progress.
+
+<Gallery items={[
+  {
+    src: "/projects/the-circussy-one/the-circussy-one-ticket-booth.webp",
+    alt: "A red-and-gold Ticket Booth model in the project's promotion artwork, with hanging strips of tickets.",
+    caption: "The Ticket Booth model, shown in the original promotion artwork. Ticket rewards draw the player towards deliberate interactions."
+  },
+  {
+    src: "/projects/the-circussy-one/the-circussy-one-chests.webp",
+    alt: "The project's promotion artwork shows an Open Chest, a Locked Chest, and a wheeled Premium Chest model.",
+    caption: "Three chest models from the promotion artwork. Chests grant items separately from the weapon and Talent choices at level-up."
+  }
+]} />
+
+Pickup attraction and deliberate interaction have different ranges. Increasing the magnet radius for XP should not let the player open a distant chest. Healing Treats use the pickup system too, but do not magnet towards a player already at full health.
+
+## The Presented Prototype
+
+The three-Act run is playable end to end. Its balance and terrain were tuned for the presentation build, and the recordings here show that prototype. Art combines authored models with generated materials and scenery. Larger content pools and further balance work remain possible continuations.
+
+<RelatedContent slug="copperfall" title="Building the Earlier 2D Engine" />

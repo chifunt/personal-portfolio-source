@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-09-15T21:55:56.955Z",
+  "images": {
+    "character": {
+      "src": "/projects/steampunk-study/steampunk-study-character.webp",
+      "width": 960,
+      "height": 960,
+      "format": "webp"
+    },
+    "room": {
+      "src": "/projects/steampunk-study/steampunk-study-room.webp",
+      "width": 1536,
+      "height": 1024,
+      "format": "webp"
+    },
+    "topology": {
+      "src": "/projects/steampunk-study/steampunk-study-topology.webp",
+      "width": 960,
+      "height": 960,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

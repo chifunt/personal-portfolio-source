@@ -1,0 +1,72 @@
+---
+title: "The Saga of the Broken Sword and the Torrent of Malice: The Return of the Scarlet King and the Accursed Queen of Terror"
+summary: The name field starts overwriting its own buttons. In this retro puzzle game, the way forward is to find the mistake and use it.
+slug: the-saga-of-the-broken-sword-and-the-torrent-of-malice
+status: Prototype
+tags: [Games]
+thumbnail: /projects/the-saga-of-the-broken-sword-and-the-torrent-of-malice/the-saga-of-the-broken-sword-and-the-torrent-of-malice-gameplay.webp
+hero: /projects/the-saga-of-the-broken-sword-and-the-torrent-of-malice/the-saga-of-the-broken-sword-and-the-torrent-of-malice-gameplay.webp
+quickStats:
+  tech: [Unity, C#]
+  role: Player controls, inventory, and presentation
+links:
+  - label: Source on GitHub
+    href: https://github.com/zst-c/gamejam
+  - label: Original Screenshot Album
+    href: https://imgur.com/a/GygOWGD
+---
+
+Before you can begin the adventure, the game asks for your name. Keep typing and letters start appearing on the Cancel and OK buttons. The form's apparent failure is the first thing you can use to make progress.
+
+We made this retro puzzle game for the Bristol CSS Game Jam in 2022, under the theme "It's not a bug, it's a feature." It presents itself as an old, faulty fantasy game. Its oversized title and solemn introduction set up a story that the interface immediately starts getting wrong.
+
+Our team received the jam's prize for Best Engagement with History & Culture. My work included the player controller and animation, the inventory and item dropping, the story cutscene, and presentation work on menus, sound cues, and post-processing.
+
+## A Name That Outgrows Its Field
+
+The name-entry puzzle divides the input into groups of four characters. The first two groups occupy the name's display cells. Further groups replace the button labels. Continuing past those groups triggers the next scene.
+
+The memory panel makes the change visible. As you type, its labelled groups fill with ones. That lets you connect your input to the interface's strange behaviour, rather than relying only on a hidden trigger.
+
+<Gallery items={[
+  {
+    src: "/projects/the-saga-of-the-broken-sword-and-the-torrent-of-malice/the-saga-of-the-broken-sword-and-the-torrent-of-malice-title.webp",
+    alt: "The game's full fantasy title in white pixel lettering over a monochrome, curved CRT-style screen.",
+    caption: "The title screen commits to the long name. Screen curvature, glow, and grain carry into the interface."
+  },
+  {
+    src: "/projects/the-saga-of-the-broken-sword-and-the-torrent-of-malice/the-saga-of-the-broken-sword-and-the-torrent-of-malice-name-entry.webp",
+    alt: "The name-entry screen with Arthur typed in the field and a memory panel showing name and button cells on the right.",
+    caption: "The memory panel sits beside the name field, where the first interface puzzle takes place."
+  }
+]} />
+
+<Mermaid
+  title="When the Name Outgrows Its Field"
+  caption="The puzzle simulates an overflow through deliberate string handling. It does not corrupt the computer's memory."
+  chart={`flowchart TD
+    accTitle: When the Name Outgrows Its Field
+    accDescr: Successive four-character groups fill two name cells, then change the Cancel and OK labels. More input advances the game to the next scene.
+    A[Type a Name] --> B[Fill Two Name Groups]
+    B --> C[Replace the Cancel Label]
+    C --> D[Replace the OK Label]
+    D --> E[Advance to the Next Scene]`}
+/>
+
+The implementation uses string slices and explicit scene changes. The binary-looking display reports occupied positions in each group. It is a small model of an overflow, built to make a programming failure readable as a puzzle.
+
+## Getting Around the Adventure
+
+The player moves one grid step at a time. The controller checks the destination for a blocking collider before advancing a target point, then moves the character towards it. Animation remembers the last movement direction when the player stops.
+
+The inventory has four slots with Q, E, R, and T shortcuts. Dropping an item creates it back in the world and frees its slot. I worked on those controls and the pickup-and-drop behaviour, which give the adventure its basic interactions beyond the menus.
+
+The surviving overworld screenshot shows a key in the hotbar, coloured locks, and the memory panel beside the playfield. It also shows how the pixel sprites and bright paths contrast with the monochrome menus.
+
+## Making the Fault Look Intentional
+
+The CRT-style curve, grain, and glowing text belong to the game's presentation. I worked on post-processing across the menus and settings, along with button sounds and the opening and ending scenes.
+
+That presentation gives the interface failures a consistent setting. A modern form that corrupts its labels looks broken. Here, the memory readout sits beside it and the rest of the game has already established an unstable old machine.
+
+The [public repository](https://github.com/zst-c/gamejam) preserves the Unity jam source. The screenshots above come from the [original album](https://imgur.com/a/GygOWGD).

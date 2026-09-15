@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-09-15T23:25:31.663Z",
+  "images": {
+    "home": {
+      "src": "/projects/personal-portfolio/personal-portfolio-home.webp",
+      "width": 1270,
+      "height": 714,
+      "format": "webp"
+    },
+    "projects": {
+      "src": "/projects/personal-portfolio/personal-portfolio-projects.webp",
+      "width": 1270,
+      "height": 714,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}

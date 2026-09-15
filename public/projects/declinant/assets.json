@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-09-15T21:55:57.254Z",
+  "images": {
+    "cover": {
+      "src": "/projects/declinant/declinant-cover.webp",
+      "width": 1024,
+      "height": 1024,
+      "format": "webp"
+    },
+    "gameplay-poster": {
+      "src": "/projects/declinant/declinant-gameplay-poster.webp",
+      "width": 540,
+      "height": 1080,
+      "format": "webp"
+    },
+    "prototype-poster": {
+      "src": "/projects/declinant/declinant-prototype-poster.webp",
+      "width": 540,
+      "height": 1080,
+      "format": "webp"
+    }
+  },
+  "videos": {
+    "gameplay": {
+      "src": "/projects/declinant/declinant-gameplay.mp4",
+      "format": "mp4"
+    },
+    "prototype": {
+      "src": "/projects/declinant/declinant-prototype.mp4",
+      "format": "mp4"
+    }
+  },
+  "audio": {},
+  "other": {}
+}

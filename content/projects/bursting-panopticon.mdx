@@ -1,0 +1,39 @@
+---
+title: Bursting Panopticon
+summary: Govern a city of living bubbles, where funding an invention can cost the supplies you need for the next crisis.
+slug: bursting-panopticon
+featured: true
+tags: [Games]
+thumbnail: /projects/bursting-panopticon/bursting-panopticon-title.webp
+quickStats:
+  tech: [JavaScript, HTML, CSS]
+links:
+  - label: Source on GitHub
+    href: https://github.com/chifunt/bursting-panopticon
+---
+
+The Gas Tinkerers arrive with an invention to fund. Supporting them costs ten water and ten fat from the city's stockpile. Declining saves the supplies and loses their goodwill.
+
+You make that decision as the newly crowned Caesar of Bullospolis, a city of living bubbles. Bursting Panopticon is a browser game made for the 2025 Global Game Jam. Its story advances through requests and crises, with the city's resources and faction reputations visible around each event.
+
+## A Price Now, a Consequence Later
+
+The research request makes the immediate tradeoff explicit.
+
+| Decision | Water | Fat | Gas reputation |
+| --- | --- | --- | --- |
+| Fund the research | Lose 10 | Lose 10 | Gain 3 |
+| Decline | No change | No change | Lose 1 |
+
+The choice also sets a story flag. The next day's events check whether the research received support, so the decision changes which follow-up you see. The numbers tell you what it costs now; the later event shows what the faction did with your answer.
+
+<Gallery items={[
+  { src: "/projects/bursting-panopticon/bursting-panopticon-opening.webp", alt: "The opening event introduces the new Caesar, surrounded by resource and reputation counters.", caption: "Taking office in Bullospolis. The stockpile and reputations remain visible around the event." },
+  { src: "/projects/bursting-panopticon/bursting-panopticon-decision.webp", alt: "Gas bubbles request research funding. A choice shows its cost in water and fat and its effect on reputation.", caption: "The Gas Tinkerers' request shows the cost of accepting and the reputation lost by declining." }
+]} />
+
+## Keeping the Events in Data
+
+The event text, requirements, and outcomes live in JSON files grouped by day. JavaScript reads those records, creates the choice buttons, and applies their effects. A choice can require supplies or a story flag, and the interface explains unmet requirements when it disables a button.
+
+This lets an event's wording and consequences sit together in the same record. The renderer handles the repeated work of showing the card and updating the city.

@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-09-14T20:34:37.662Z",
+  "images": {
+    "support-gap": {
+      "src": "/projects/the-second-student/the-second-student-support-gap.webp",
+      "width": 1280,
+      "height": 720,
+      "format": "webp"
+    },
+    "title": {
+      "src": "/projects/the-second-student/the-second-student-title.webp",
+      "width": 1280,
+      "height": 720,
+      "format": "webp"
+    }
+  },
+  "videos": {},
+  "audio": {},
+  "other": {}
+}
