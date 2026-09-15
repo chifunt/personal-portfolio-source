@@ -33,7 +33,7 @@ export function ContentCard({ content, index, basePath }: ContentCardProps) {
           </div>
 
           <div className="relative w-full overflow-hidden">
-            <div className="aspect-video">
+            <div className="relative aspect-video">
               {content.thumbnail ? (
                 <ImageWithFallback
                   src={content.thumbnail}

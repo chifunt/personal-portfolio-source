@@ -122,7 +122,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${readexPro.variable} ${robotoMono.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${readexPro.variable} ${robotoMono.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased">
         <SiteMotionProvider>
           {/* Decorative background layers */}

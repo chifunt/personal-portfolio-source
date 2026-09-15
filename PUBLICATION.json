@@ -1,6 +1,6 @@
 {
-  "sourceRevision": "ff1233c8862a1acd0e63a8589edb99693a9b7896",
-  "exportedAt": "2026-09-15T23:25:44.763Z",
+  "sourceRevision": "e551903dc2007143e6ec05b41a0abe9bb0e07e6d",
+  "exportedAt": "2026-09-15T23:36:54.451050+00:00",
   "files": {
     ".github/workflows/checks.yml": "c143ea3a5145612e7ed1211854073d49805020c188e2320974c1f9614b2fbbbe",
     ".gitignore": "58564913a6822f4ce1d1f0c371c23e13cf0abbe5fe9210669281a0370f65f8c6",
@@ -15,7 +15,7 @@
     "app/extras/loading.tsx": "9e1ac4077d21536321677f9b65d9cf9ab3c44496a8d336c502a58570df373ac2",
     "app/extras/page.tsx": "b2f3e3e5ab57b514de65e281968c10ba85332ec05008f2644163e76641b1c0a9",
     "app/globals.css": "3b99bd5e5703859248096b983f33ca7425f476bb67c3c4a9f6430669ef5798fc",
-    "app/layout.tsx": "42bdd808ca7d858452e2aeb678aa41dc3e706454ebb01ea3e6ea666c851d729d",
+    "app/layout.tsx": "3348bd75e4bcdfbe77563144c9c58d2221cecb92ec3b520f46a81317b6ebf79e",
     "app/not-found.tsx": "8f11698eca0e4688d7d1005d7e245613480f51107ba799ca03c68405331524fc",
     "app/page.tsx": "fcad689891fd52307627867cc45ac5663b747f8c6ddb9193541517c36eee1dcf",
     "app/projects/[slug]/page.tsx": "443ab257c4bef3b3d01f723896b94377334c0c412f689ab2c707d82a6f8fa74b",
@@ -26,7 +26,7 @@
     "components/ascii-portrait.tsx": "fe7bf90d54de16e53d53fc0cb0a1c562cd76b14b347f0877ef8e987c000fcf8c",
     "components/brand-icons.tsx": "ee0d24a3c70a13a57a855847d6746ba114ac84696261dd39fb22b0acde373d5d",
     "components/c-matrix-layer.tsx": "682ac0a7f4b480920a5d13d6fae44d5358089036945ae867735be5810b66273d",
-    "components/content-card.tsx": "06f26d08d9325225df5bd3c99484e1f7d75e3176e9363207e29b83e862bc2864",
+    "components/content-card.tsx": "a18dcd9dc15ff750fe35dc5cb112c23fb8a9ddc58895fc21bee53e30c20e68f5",
     "components/content-detail-page.tsx": "956782fb751540fefa20dcd409acd4998240c2c1310581b8635a596cddcc2346",
     "components/content-index.tsx": "a9e261d7753dd02f3172f8a7f9b72583721f21c5594f548cd2f3e94f152e3705",
     "components/extras-teaser.tsx": "2b5f751c87e28eb3b0edfec25b8c38fd8921e53c48a6c2bce3f39a6e8aee6e82",
