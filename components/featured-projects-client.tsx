@@ -1,5 +1,6 @@
 "use client"
 
+import { useLayoutEffect, useRef } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import Link from "next/link"
 import { Card } from "@/components/ui/card"
@@ -11,6 +12,46 @@ import { GearPlaceholder } from "@/components/gear-placeholder"
 
 interface FeaturedProjectsClientProps {
   entries: ContentEntry[]
+}
+
+function FeaturedProjectTitle({ title }: { title: string }) {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const textRef = useRef<HTMLSpanElement>(null)
+
+  useLayoutEffect(() => {
+    const heading = headingRef.current
+    const text = textRef.current
+    if (!heading || !text) return
+
+    let disposed = false
+    const fitTitle = () => {
+      if (disposed || heading.clientWidth <= 1) return
+
+      // Start at the normal size so titles can grow again when the card widens.
+      text.style.fontSize = ""
+      if (text.offsetWidth > heading.clientWidth) {
+        text.style.fontSize = `${(heading.clientWidth - 1) / text.offsetWidth}em`
+      }
+    }
+
+    fitTitle()
+    const observer = new ResizeObserver(fitTitle)
+    observer.observe(heading)
+    void document.fonts.ready.then(fitTitle)
+    document.fonts.addEventListener("loadingdone", fitTitle)
+
+    return () => {
+      disposed = true
+      observer.disconnect()
+      document.fonts.removeEventListener("loadingdone", fitTitle)
+    }
+  }, [title])
+
+  return (
+    <h3 ref={headingRef} className="whitespace-nowrap text-xs sm:text-sm font-medium leading-snug text-foreground">
+      <span ref={textRef} className="inline-block">{title}</span>
+    </h3>
+  )
 }
 
 export function FeaturedProjectsClient({ entries }: FeaturedProjectsClientProps) {
@@ -64,9 +105,7 @@ export function FeaturedProjectsClient({ entries }: FeaturedProjectsClientProps)
                   </div>
                 )}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-background/90 px-2 py-1.5 sm:px-3 sm:py-2.5">
-                  <h3 className="text-xs sm:text-sm font-medium leading-snug text-foreground">
-                    {project?.title ?? "Coming Soon"}
-                  </h3>
+                  <FeaturedProjectTitle title={project?.title ?? "Coming Soon"} />
                 </div>
               </Card>
             )

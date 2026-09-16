@@ -1,6 +1,6 @@
 {
-  "sourceRevision": "e551903dc2007143e6ec05b41a0abe9bb0e07e6d",
-  "exportedAt": "2026-09-15T23:36:54.451050+00:00",
+  "sourceRevision": "bb69546fe79484130d81ef1d21c1a6acc586303e",
+  "exportedAt": "2026-09-16T05:10:46.899686+00:00",
   "files": {
     ".github/workflows/checks.yml": "c143ea3a5145612e7ed1211854073d49805020c188e2320974c1f9614b2fbbbe",
     ".gitignore": "58564913a6822f4ce1d1f0c371c23e13cf0abbe5fe9210669281a0370f65f8c6",
@@ -30,7 +30,7 @@
     "components/content-detail-page.tsx": "956782fb751540fefa20dcd409acd4998240c2c1310581b8635a596cddcc2346",
     "components/content-index.tsx": "a9e261d7753dd02f3172f8a7f9b72583721f21c5594f548cd2f3e94f152e3705",
     "components/extras-teaser.tsx": "2b5f751c87e28eb3b0edfec25b8c38fd8921e53c48a6c2bce3f39a6e8aee6e82",
-    "components/featured-projects-client.tsx": "09590486612b91a3593781895045eb4ec2b73937d3af966dba4bda549100a41c",
+    "components/featured-projects-client.tsx": "443db9d809a67635f48acfd954ac3e432eb0bf6c8a3774f380f46f7c3b30e71f",
     "components/featured-projects.tsx": "9bd5e402efcd222e8ff3cd4d786379cca873ae3398af6f6dd33ea887dd1d2eee",
     "components/feedback-cta.tsx": "86f768f8afcda88aaeb0b8b9c56d48a73e94bc8f4bac689287add8ea63a5c587",
     "components/footer.tsx": "002b3d1dba8ab13cd06670fd48907eefca93e820e8bc62b5da5c7df9ee497538",
